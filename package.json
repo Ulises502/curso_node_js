@@ -1,0 +1,23 @@
+{
+  "name": "curso_node_js",
+  "version": "1.0.0",
+  "description": "Api - back end con nodejs para curso",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ulises502/curso_node_js.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ulises502/curso_node_js/issues"
+  },
+  "homepage": "https://github.com/Ulises502/curso_node_js#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
