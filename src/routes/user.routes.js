@@ -1,19 +1,15 @@
 const router = require("express").Router();
+const {
+  getUsers,
+  addUser,
+  deleteUser,
+  updateUser,
+} = require("../controller/user.controller");
+const { authJwt } = require("../middleware");
 
-router.get("/:name", (req, res) => {
-  const { name } = req.params;
-  res.send("Bienvenido " + name);
-});
-
-router.post("/:name", (req, res) => {
-    const { name } = req.params;
-    res.send("Bienvenido " + name);
-  });
-
-router.get("/:name/:apellido", (req, res) => {
-  const { name } = req.params;
-  const { apellido } = req.params;
-  res.send("Bienvenido " + name + " " + apellido);
-});
+router.get("/", [authJwt.check], getUsers);
+router.post("/", [authJwt.check], addUser);
+router.delete("/:id", [authJwt.check], deleteUser);
+router.put("/:id", [authJwt.check], updateUser);
 
 module.exports = router;
