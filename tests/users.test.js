@@ -1,5 +1,5 @@
-const { app } = require("../app.ts")
-import db from "../src/database/models"
+const { app } = require("../app.js");
+const db = require("../src/database/models");
 
 //import * as faker from "faker"
 //import supertest from "supertest"
@@ -9,7 +9,7 @@ console.log("Hola");
 
 describe("test all the Users endpoints", () => {
   // Set the db object to a variable which can be accessed throughout the whole test file
-  let thisDb: any = db
+  let thisDb = db;
 
   // Before any tests run, clear the DB and run migrations with Sequelize sync()
   beforeAll(async () => {
