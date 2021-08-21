@@ -24,7 +24,7 @@ const updateUser = async (req, res) => {
   const { id } = req.params;
   const data = req.body;
   const updated = await model.User.update(data, { where: { id: id } });
-  console.log(updated);
+  //console.log(updated);
   const user = await model.User.findByPk(id);
   return res.status(200).json({ user });
 };

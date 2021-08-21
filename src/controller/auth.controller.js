@@ -33,7 +33,7 @@ const login = async (req, res) => {
 };
 
 const register = async (req, res) => {
-  console.log("REGISTRANDO...");
+  //console.log("REGISTRANDO...");
   const { username, password, phone, email, firstName, lastName } = req.body;
   if (!username || !password) {
     return res.status(401).send({ message: 'Datos incompletos' });

@@ -16,12 +16,6 @@ describe("Test all the Users endpoints", () => {
   })
 
 
-  describe('Sample Test', () => {
-    it('should test that true === true', () => {
-      expect(true).toBe(true)
-    })
-  })
-
   // ADD USER TEST
   it('should create a new user', async () => {
     const resp = await request(app).post('/auth/register').send({
@@ -33,9 +27,8 @@ describe("Test all the Users endpoints", () => {
       password: "1234"
     }).then(v => {
       token = v.body.token;
-      console.log(token);
+      //console.log(token);
     });
-
 
     const res = await request(app)
       .post('/api/v1/users')
@@ -55,9 +48,9 @@ describe("Test all the Users endpoints", () => {
     //expect(res.body).toHaveProperty('post');
   });
 
+
   // GET USERS TEST
   it('should fetch all Users', async () => {
-    //const postId = 1;
     const res = await request(app).get("/api/v1/users").set({
       "x-access-token": token,
     });
@@ -66,6 +59,33 @@ describe("Test all the Users endpoints", () => {
   });
 
 
+  // UPDATE USERS TEST
+  it('should update an User', async () => {
+    const userId = 1;
+    const res = await request(app).put("/api/v1/users/"+userId).send({
+      firstName: "Test User",
+      lastName: "Last name",
+      phone: "00000000000",
+      email: "pepitojose@test.com",
+      username: "Test User",
+      password: "123456"
+    }).set({
+      "x-access-token": token,
+    });
+    expect(res.statusCode).toEqual(200);
+    //expect(res.body).toHaveProperty('post');
+  });
+
+
+  // DELETE USERS TEST
+  it('should delete an User', async () => {
+    const userId = 1;
+    const res = await request(app).put("/api/v1/users/"+userId).set({
+      "x-access-token": token,
+    });
+    expect(res.statusCode).toEqual(200);
+    //expect(res.body).toHaveProperty('post');
+  });
 
 
   /*
