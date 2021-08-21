@@ -7,7 +7,7 @@
   "description": "Api - back end con nodejs para curso",
   "main": "index.js",
   "scripts": {
-    "test": "SET NODE_ENV=test npx jest --transformIgnorePatterns \"node_modules/(?!curso_node_js)/\" --env=jsdom --runInBand",
+    "test": "npx jest --runInBand",
     "start": "nodemon src/index.js",
     "db:create": "npx sequelize-cli db:create",
     "db:migrate": "npx sequelize-cli db:migrate"

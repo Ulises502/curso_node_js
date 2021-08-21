@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const check = (req, res, next) => {
   const token = req.headers["x-access-token"];
   if (!token) {
+    console.log("NO HAY TOKEN");
     return res.status(401).send({
       message: "No enviaste el token",
     });

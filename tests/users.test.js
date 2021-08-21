@@ -1,32 +1,70 @@
 const { app } = require("../app.js");
 const db = require("../src/database/models");
-
+const request = require('supertest');
 //import * as faker from "faker"
-//import supertest from "supertest"
 
-//import { Authentication } from "../../services/Authentication"
-console.log("Hola");
 
-describe("test all the Users endpoints", () => {
+
+describe("Test all the Users endpoints", () => {
   // Set the db object to a variable which can be accessed throughout the whole test file
   let thisDb = db;
+  var token;
 
   // Before any tests run, clear the DB and run migrations with Sequelize sync()
   beforeAll(async () => {
-    await thisDb.sequelize.sync({ force: true })
+    await thisDb.sequelize.sync({ force: true });
   })
 
-  // This passes because 1 === 1
-  it('Testing to see if Jest works', () => {
-    expect(1).toBe(1)
-  })
 
   describe('Sample Test', () => {
     it('should test that true === true', () => {
       expect(true).toBe(true)
     })
   })
-  
+
+  // ADD USER TEST
+  it('should create a new user', async () => {
+    const resp = await request(app).post('/auth/register').send({
+      firstName: "tokenUser",
+      lastName: "Lastname",
+      phone: "9999999999",
+      email: "tokenjose@test.com",
+      username: "tokenUser",
+      password: "1234"
+    }).then(v => {
+      token = v.body.token;
+      console.log(token);
+    });
+
+
+    const res = await request(app)
+      .post('/api/v1/users')
+      .send({
+        firstName: "Test User",
+        lastName: "Last name",
+        phone: "221999888",
+        email: "pepitojose@test.com",
+        username: "Test User",
+        password: "123456"
+      })
+      .set({
+        "x-access-token": token,
+      });
+    //console.log(res);
+    expect(res.statusCode).toEqual(201);
+    //expect(res.body).toHaveProperty('post');
+  });
+
+  // GET USERS TEST
+  it('should fetch all Users', async () => {
+    //const postId = 1;
+    const res = await request(app).get("/api/v1/users").set({
+      "x-access-token": token,
+    });
+    expect(res.statusCode).toEqual(200);
+    //expect(res.body).toHaveProperty('post');
+  });
+
 
 
 

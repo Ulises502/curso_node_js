@@ -1,14 +1,15 @@
 // Get dependencies
 const express = require('express');
-const db = require("./src/database/models");
-
-// Route handlers
-//const authApi = require('./v1/auth');
+const userRouter = require('./src/routes/user.routes.js');
+const authRouter = require('./src/routes/auth.routes.js');
 
 // Create server
 const app = express();
 
-// API routes
-//app.use('/v1/auth', authApi);
+// routes
+app.use(express.json());
 
-module.export = { app };
+app.use('/api/v1/users', userRouter);
+app.use('/auth', authRouter);
+
+module.exports = { app };
