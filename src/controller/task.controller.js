@@ -9,8 +9,8 @@ const getTasks = async (req, res) => {
 const addTask = async (req, res) => {
   const { userId } = req; //me agarro el id que guardo cuando pasa por el middleware
   const user = await model.User.findByPk(userId); // me traigo al usuario que esta haciendo la peticion
-  const { name, description, startDate, endDate } = req.body; // agarro los parametros que envie en el body
-  await model.Task.create({ name, description, startDate, endDate, UserId: userId }).then(
+  const { name, fechaCreacion, fechaVencimiento, descripcion, completada } = req.body; // agarro los parametros que envie en el body
+  await model.Task.create({ name, fechaCreacion, fechaVencimiento, descripcion, completada, UserId: userId }).then(
     async (createdTask) => {
       await createdTask.setUser(user); // usamos el setter para asignarle el valor
       return res.status(201).json({ createdTask });
@@ -22,12 +22,13 @@ const addTask = async (req, res) => {
 // y lo enviamos directamente al crear la task
 const addTaskOpcionA = async (req, res) => {
   const { userId } = req;
-  const { name, description, startDate, endDate } = req.body;
+  const { name, fechaCreacion, fechaVencimiento, descripcion, completada } = req.body;
   const inserted = await model.Task.create({
     name,
-    description,
-    startDate,
-    endDate,
+    fechaCreacion,
+    fechaVencimiento,
+    descripcion,
+    completada,
     UserId: userId, //insertamos el id del usuario directamente al crear la task
   });
   return res.status(201).json({ inserted });
