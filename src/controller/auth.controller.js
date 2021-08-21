@@ -33,7 +33,7 @@ const login = async (req, res) => {
 };
 
 const register = async (req, res) => {
-  const { username, password, email, firstName, lastName } = req.body;
+  const { username, password, phone, email, firstName, lastName } = req.body;
   if (!username || !password) {
     return res.status(401).send({ message: 'Datos incompletos' });
   }
@@ -46,6 +46,7 @@ const register = async (req, res) => {
   const inserted = await model.User.create({
     username,
     password: hashedPassword,
+    phone,
     email,
     firstName,
     lastName,
