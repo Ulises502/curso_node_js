@@ -45,7 +45,7 @@ const updateTask = async (req, res) => {
   const { id } = req.params;
   const data = req.body;
   const updated = await model.Task.update(data, { where: { id: id } });
-  console.log(updated);
+  //console.log(updated);
   const task = await model.Task.findByPk(id);
   return res.status(200).json({ task });
 };

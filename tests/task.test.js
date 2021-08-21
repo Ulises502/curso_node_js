@@ -1,7 +1,6 @@
 const { app } = require("../app.js");
 const db = require("../src/database/models");
 const request = require('supertest');
-const { date } = require("faker/locale/zh_TW");
 //import * as faker from "faker"
 
 
