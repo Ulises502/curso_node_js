@@ -42,10 +42,24 @@ describe("Test all the Users endpoints", () => {
       })
       .set({
         "x-access-token": token,
+      }).then((response) => {
+        expect(response.statusCode).toEqual(201);
+        // Check type and length
+        //console.log(response.body);
+        expect(response.body).toHaveProperty('inserted');
+        expect(response.body.inserted).toHaveProperty('id');
+        expect(response.body.inserted).toHaveProperty('firstName');
+        expect(response.body.inserted).toHaveProperty('lastName');
+        expect(response.body.inserted).toHaveProperty('phone');
+        expect(response.body.inserted).toHaveProperty('email');
+        expect(response.body.inserted).toHaveProperty('username');
+        expect(response.body.inserted).toHaveProperty('password');
+
+        // Check data
+        //expect(response.body.inserted.id).toBe(id);
+        expect(response.body.inserted.firstName).toBe("Test User");
+        expect(response.body.inserted.lastName).toBe("Last name");
       });
-    //console.log(res);
-    expect(res.statusCode).toEqual(201);
-    //expect(res.body).toHaveProperty('post');
   });
 
 
@@ -53,19 +67,24 @@ describe("Test all the Users endpoints", () => {
   it('should fetch all Users', async () => {
     const res = await request(app).get("/api/v1/users").set({
       "x-access-token": token,
+    }).then((response) => {
+      expect(response.statusCode).toEqual(200);
+      //console.log(response.body);
+
+      expect(Array.isArray(response.body.users)).toBeTruthy();
+      expect(response.body.users[0]).toHaveProperty('Tasks');
+      expect(Array.isArray(response.body.users[0].Tasks)).toBeTruthy();
     });
-    expect(res.statusCode).toEqual(200);
-    //expect(res.body).toHaveProperty('post');
   });
 
 
   // UPDATE USERS TEST
   it('should update an User', async () => {
     const userId = 1;
-    const res = await request(app).put("/api/v1/users/"+userId).send({
+    const res = await request(app).put("/api/v1/users/" + userId).send({
       firstName: "Test User",
       lastName: "Last name",
-      phone: "00000000000",
+      phone: "0000",
       email: "pepitojose@test.com",
       username: "Test User",
       password: "123456"
@@ -73,60 +92,22 @@ describe("Test all the Users endpoints", () => {
       "x-access-token": token,
     });
     expect(res.statusCode).toEqual(200);
-    //expect(res.body).toHaveProperty('post');
+    //console.log(res.body);
+    expect(res.body.user).toHaveProperty('id');
+    expect(res.body.user.phone).toEqual('0000');
   });
 
 
   // DELETE USERS TEST
   it('should delete an User', async () => {
     const userId = 1;
-    const res = await request(app).put("/api/v1/users/"+userId).set({
+    const res = await request(app).put("/api/v1/users/" + userId).set({
       "x-access-token": token,
     });
     expect(res.statusCode).toEqual(200);
-    //expect(res.body).toHaveProperty('post');
   });
 
 
-  /*
-  it("should succeed when accessing an authed route with a valid JWT", async () => {
-    const authentication = new Authentication()
-    const randomString = faker.random.alphaNumeric(10)
-    const email = `user-${randomString}@email.com`
-    const password = `password`
-
-    await authentication.createUser({ email, password })
-
-    const { authToken } = await authentication.loginUser({
-      email,
-      password,
-    })
-
-    // App is used with supertest to simulate server request
-    const response = await supertest(app)
-      .post("/v1/auth/protected")
-      .expect(200)
-      .set("authorization", `bearer ${authToken}`)
-
-    expect(response.body).toMatchObject({
-      success: true,
-    })
-  })
-
-  it("should fail when accessing an authed route with an invalid JWT", async () => {
-    const invalidJwt = "OhMyToken"
-
-    const response = await supertest(app)
-      .post("/v1/auth/protected")
-      .expect(400)
-      .set("authorization", `bearer ${invalidJwt}`)
-
-    expect(response.body).toMatchObject({
-      success: false,
-      message: "Invalid token.",
-    })
-  })
-  */
 
   // After all tersts have finished, close the DB connection
   afterAll(async () => {
