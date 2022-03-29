@@ -1,4 +1,4 @@
-const model = require('../database/models/index');
+const model = require('../database/models/index'); // conecta el modelo con el controlador y trae la estructura de User
 
 const getUsers = async (req, res) => {
   const users = await model.User.findAll({

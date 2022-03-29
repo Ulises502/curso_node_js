@@ -6,6 +6,7 @@ require('dotenv').config();
 const PORT = process.env.PORT || 5000;
 
 const configApi = (app) => {
+  // para que la API maneje los datos en formato json
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
   //app.use(cors());
