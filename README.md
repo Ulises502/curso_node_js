@@ -23,7 +23,7 @@ Tener disponible nodemon para arrancar el server en cualquier momento. Si ya se 
 - npm install nodemon -g
 
 Ejecutar nodemon (en package.json en scripts se pone: "start": "nodemon src/index.js")
-- nodemon
+- npm start
 
 ## Armar proyecto
 Se puede contruir a mano los controllers y los routers. Usar la misma estructura que el proyecto.

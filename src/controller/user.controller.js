@@ -34,4 +34,4 @@ module.exports = {
   addUser,
   deleteUser,
   updateUser,
-};
+}; // se usan llaves para exportar variables que tienen funciones dentro

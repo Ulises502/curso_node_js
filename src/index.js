@@ -14,11 +14,13 @@ const configApi = (app) => {
 };
 
 const configRouter = (app) => {
+  // aca se registran las rutas bases
   app.use('/api/v1/', routerConfig.loggedInRoutes());
   app.use('/', routerConfig.authroutes());
 };
 
 const configHeaders = (app) => {
+  // aca se registran los headers que se van a permitir
   app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Allow', 'GET, POST, PUT, DELETE, OPTIONS');
@@ -27,7 +29,7 @@ const configHeaders = (app) => {
 };
 
 const init = () => {
-  const app = express();
+  const app = express(); // se define app y luego se le agregan las configuraciones
   configApi(app);
   configRouter(app);
   configHeaders(app);

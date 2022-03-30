@@ -13,4 +13,4 @@ router.post("/", [authJwt.check], addUser);
 router.delete("/:id", [authJwt.check], deleteUser);
 router.put("/:id", [authJwt.check], updateUser);
 
-module.exports = router;
+module.exports = router; // exporta el router como una variables, NO como función
