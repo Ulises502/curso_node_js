@@ -29,4 +29,17 @@ Ejecutar nodemon (en package.json en scripts se pone: "start": "nodemon src/inde
 Se puede contruir a mano los controllers y los routers. Usar la misma estructura que el proyecto.
 
 ## Configurar la base de datos
-Configurar Sequelize 
+Crear .env con los datos de la base de datos
+- NODE_ENV=development
+- PORT=****
+- DB_USERNAME="****"
+- DB_PASSWORD="****"
+- DB_NAME="database_name"
+- DB_TEST_NAME="test_database"
+
+Configurar Sequelize
+- npm install -g sequelize-cli
+- npm install --save sequelize pg pg-hstore
+- npx sequelize-cli
+
+Crear .sequelizerc con las direcciones de los modelos de la base de datos
