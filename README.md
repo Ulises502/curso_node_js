@@ -43,3 +43,48 @@ Configurar Sequelize
 - npx sequelize-cli
 
 Crear .sequelizerc con las direcciones de los modelos de la base de datos
+Crear config.js en carpeta database/config con las configuraciones de la base de datos (usar proyecto)
+
+Para crear la base de datos (usa los datos guardados en .env)
+- npm run db:create
+
+Crear un archivo en modelo
+- npx sequelize-cli model:generate --name User --attributes name:string,email:string,password:string
+
+¿Por qué conviene usar la linea de comando para crear modelo que tiene "extendes Model"?
+    A Model represents a table in the database. Instances of this class represent a database row.
+
+    Model instances operate with the concept of a dataValues property, which stores the actual values represented by the instance. By default, the values from dataValues can also be accessed directly from the Instance, that is:
+
+    instance.field
+    // is the same as
+    instance.get('field')
+    // is the same as
+    instance.getDataValue('field')
+
+
+
+
+
+Crear archivo para migracion a la base de datos
+- npx sequelize-cli db:migrate      (o se puede usar - npm run db:migrate)
+
+Los archivos migrations tienen dentro info de la estructura de la tabla
+    id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: DataTypes.INTEGER
+    },
+    username: {
+        allowNull: false,
+        type: DataTypes.STRING,
+        unique: true,
+        validate: {}
+    },
+
+El database/models/index.js tiene el comando para actualizar la estructura de la base de datos con cada modificación
+    // sequelize.sync()
+    // sequelize.sync({force:true})
+    // sequelize.sync({ alter: true });
+
