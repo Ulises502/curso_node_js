@@ -52,9 +52,11 @@ Crear un archivo en modelo
 - npx sequelize-cli model:generate --name User --attributes name:string,email:string,password:string
 
 ¿Por qué conviene usar la linea de comando para crear modelo que tiene "extendes Model"?
-    A Model represents a table in the database. Instances of this class represent a database row.
 
-    Model instances operate with the concept of a dataValues property, which stores the actual values represented by the instance. By default, the values from dataValues can also be accessed directly from the Instance, that is:
+A Model represents a table in the database. Instances of this class represent a database row.
+
+    Model instances operate with the concept of a dataValues property, which stores the actual values represented by the instance. 
+    By default, the values from dataValues can also be accessed directly from the Instance, that is:
 
     instance.field
     // is the same as
@@ -67,6 +69,7 @@ Crear archivo para migracion a la base de datos
 - npx sequelize-cli db:migrate      (o se puede usar - npm run db:migrate)
 
 Los archivos migrations tienen dentro info de la estructura de la tabla
+    
     id: {
         allowNull: false,
         autoIncrement: true,
@@ -81,9 +84,9 @@ Los archivos migrations tienen dentro info de la estructura de la tabla
     },
 
 El database/models/index.js tiene el comando para actualizar la estructura de la base de datos con cada modificación
-    // sequelize.sync() //- This creates the table if it doesn't exist (and does nothing if it already exists)
-    // sequelize.sync({force:true}) //- This creates the table, dropping it first if it already existed
-    // sequelize.sync({ alter: true }); //- This checks what is the current state of the table in the database (which columns it has, what are their data types, etc), and then performs the necessary changes in the table to make it match the model.
+- sequelize.sync()      // This creates the table if it doesn't exist (and does nothing if it already exists)
+- sequelize.sync({force:true})      // This creates the table, dropping it first if it already existed
+- sequelize.sync({ alter: true });      // This checks what is the current state of the table in the database (which columns it has, what are their data types, etc), and then performs the necessary changes in the table to make it match the model.
 
 **Para cargar datos a la base de datos:**
 - npx sequelize init:seeders
