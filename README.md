@@ -63,9 +63,6 @@ Crear un archivo en modelo
     instance.getDataValue('field')
 
 
-
-
-
 Crear archivo para migracion a la base de datos
 - npx sequelize-cli db:migrate      (o se puede usar - npm run db:migrate)
 
@@ -84,7 +81,16 @@ Los archivos migrations tienen dentro info de la estructura de la tabla
     },
 
 El database/models/index.js tiene el comando para actualizar la estructura de la base de datos con cada modificación
-    // sequelize.sync()
-    // sequelize.sync({force:true})
-    // sequelize.sync({ alter: true });
+    // sequelize.sync() //- This creates the table if it doesn't exist (and does nothing if it already exists)
+    // sequelize.sync({force:true}) //- This creates the table, dropping it first if it already existed
+    // sequelize.sync({ alter: true }); //- This checks what is the current state of the table in the database (which columns it has, what are their data types, etc), and then performs the necessary changes in the table to make it match the model.
 
+**Para cargar datos a la base de datos:**
+- npx sequelize init:seeders
+- npx sequelize seed:generate --name algunNombre
+
+Escribir en el archivo seeder creado los datos a cargar
+Y luego migrar:
+- npx sequelize db:seed:all
+
+## Crear nuevas peticiones en los controllers usando los del proyecto
