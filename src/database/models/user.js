@@ -15,15 +15,23 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   User.init({
+    // Model attributes are defined here
     firstName: DataTypes.STRING,
+    /*
+    firstName: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    */
     lastName: DataTypes.STRING,
     phone: DataTypes.STRING,
     email: DataTypes.STRING,
     username: DataTypes.STRING,
     password: DataTypes.STRING
   }, {
-    sequelize,
-    modelName: 'User',
+    // Other model options go here
+    sequelize, // We need to pass the connection instance
+    modelName: 'User', // We need to choose the model name
   });
   return User;
 };
