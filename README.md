@@ -51,7 +51,7 @@ Para crear la base de datos (usa los datos guardados en .env)
 Crear un archivo en modelo
 - npx sequelize-cli model:generate --name User --attributes name:string,email:string,password:string
 
-¿Por qué conviene usar la linea de comando para crear modelo que tiene "extendes Model"?
+**¿Por qué conviene usar la linea de comando para crear modelo que tiene "extendes Model"?**
 
 A Model represents a table in the database. Instances of this class represent a database row.
 
@@ -92,7 +92,8 @@ El database/models/index.js tiene el comando para actualizar la estructura de la
 - npx sequelize init:seeders
 - npx sequelize seed:generate --name algunNombre
 
-Escribir en el archivo seeder creado los datos a cargar
+Escribir en el archivo seeder creado los datos a cargar.
+
 Y luego migrar:
 - npx sequelize db:seed:all
 
